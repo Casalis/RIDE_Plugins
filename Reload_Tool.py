@@ -3,12 +3,12 @@ from robotide.publish.messages import RideNewProject, RideSaved
 from robotide.pluginapi import Plugin# ActionInfo, SeparatorInfo
 
 
-import wx.lib.inspection
-wx.lib.inspection.InspectionTool().Show()
+# import wx.lib.inspection
+# wx.lib.inspection.InspectionTool().Show()
+
 
 class Reload_Files(Plugin):
     """Used to reload files edited in external editor via shortcut."""
-
 
     def __init__(self, application):
         Plugin.__init__(self, application, metadata={'Shortcut': 'CTRL + R'})
@@ -16,7 +16,7 @@ class Reload_Files(Plugin):
         self.reg_shortcut()
 
     def reg_shortcut(self):
-        self.register_shortcut('CtrlCmd-D', self.reload_files)
+        self.register_shortcut('CtrlCmd-r', self.reload_files)
         self.subscribe(self.set_path, RideOpenSuite)
         self.subscribe(self.set_path, RideFileNameChanged)
         self.subscribe(self.set_path, RideNewProject)
@@ -24,6 +24,11 @@ class Reload_Files(Plugin):
 
     def enable(self):
         print("Reload Enabled")
+        self.reg_shortcut()
+
+    def disable(self):
+        self.unsubscribe_all()
+        self.unregister_actions()
 
     def reopen_suite(self):
         self.open_suite(self.path)
