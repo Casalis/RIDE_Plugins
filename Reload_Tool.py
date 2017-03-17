@@ -6,6 +6,7 @@ from robotide.pluginapi import Plugin# ActionInfo, SeparatorInfo
 # import wx.lib.inspection
 # wx.lib.inspection.InspectionTool().Show()
 
+# Put this script in: \robotide\site-plugins\
 
 class Reload_Files(Plugin):
     """Used to reload files edited in external editor via shortcut."""
